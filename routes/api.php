@@ -20,7 +20,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('login', 'Api\LoginController@login');
 Route::post('admin/login', 'Admin\LoginController@login');
+Route::post('admin/logout', 'Admin\LoginController@logout');
 
+Route::middleware('auth:admin')->get('admin', 'Admin\LoginController@getAdmin');
 Route::middleware('auth:admin')->get('test', function() {
     if (Auth::check()) {
         return Auth::user();
